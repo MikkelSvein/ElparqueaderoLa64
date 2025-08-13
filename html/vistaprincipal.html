@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parqueadero (Versión 1.0)</title>
+    <link rel="stylesheet" href="../css/vistaprincipal.css">
+</head>
+<body>
+    <header>
+        <a href="../html/vistaprincipal.html"><img src="../recursos/banner.png" 
+            alt="Banner parqueadero la 64"></a>
+    </header>
+
+    <main>
+        <section class="registro">
+            <h2>Registrar vehículo</h2>
+            <form id="formRegistro">
+    <label>Placa</label>
+    <input type="text" id="placa" name="placa" required>
+
+    <label>Nombre</label>
+    <input type="text" id="nombre" name="nombre" required>
+
+    <label>Documento</label>
+    <input type="text" id="documento" name="documento" required>
+
+    <label>Tipo</label>
+    <select id="tipo" name="tipo" required>
+        <option value="">Seleccione</option>
+        <option value="Bicicleta">Bicicleta</option>
+        <option value="Bus">Bus</option>
+        <option value="Carro">Carro</option>
+        <option value="Moto">Moto</option>
+    </select>
+
+    <button type="submit">Registrar</button>
+</form>
+
+        </section>
+
+        <section class="tarifas">
+            <h2>Tarifas</h2>
+            <form id="formTarifas">
+                <label>Bicicleta</label>
+                <input type="number" id="tarifaBicicleta" name="tarifaBicicleta" required>
+
+                <label>Bus</label>
+                <input type="number" id="tarifaBus" name="tarifaBus" required>
+
+                <label>Carro</label>
+               <input type="number" id="tarifaCarro" name="tarifaCarro" required>
+                <label>Moto</label>
+                <input type="number" id="tarifaMoto" name="tarifaMoto" required>
+
+                <button id="btnGuardarTarifas">Guardar</button>
+            </form>
+        </section>
+
+        <section class="lista">
+            <h2>Vehículos registrados</h2>
+            <input type="text" id="buscar" placeholder="Buscar placa o nombre">
+            <button id="btnBuscar">Buscar</button>
+            <div id="listaVehiculos"></div>
+            <div id="paginacion"></div>
+        </section>
+    </main>
+
+    <script src="../js/vistaprincipal.js"></script>
+</body>
+</html>
