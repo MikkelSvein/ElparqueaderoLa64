@@ -46,3 +46,58 @@ button {
 button:hover {
     background-color: darkgreen;
 }
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #222;
+  padding: 0 12px;
+  min-height: 65px;
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+  align-items: center;
+  min-width: 200px;
+}
+
+.nav-left a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 3px;
+  font-size: 14px;
+  font-family: 'Oswald', Arial, sans-serif;
+  letter-spacing: 1px;
+  transition: color 0.2s;
+}
+.nav-left a.active, .nav-left a:hover {
+  color: #b6aaff;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.nav-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+.banner-img {
+  max-height: 60px;
+}
+
+/* Usuario a la derecha */
+.nav-right .welcome {
+  color: #e1ce69;
+  margin-right: 7px;
+  font-size: 14px;
+  font-family: 'Oswald', Arial, sans-serif;
+  letter-spacing: 1px;
+}
+.user-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #444;
+  padding: 4px;
+}
