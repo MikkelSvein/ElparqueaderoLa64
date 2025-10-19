@@ -1,4 +1,17 @@
 <?php
+session_start();
+if (!isset($_SESSION['user'])) {
+    header('Location: login.php');
+    exit;
+}
+
+$user = $_SESSION['user'];
+$roles = $user['roles'] ?? [];
+
+if (!in_array('Administrador', $roles)) {
+    echo "🚫 Acceso denegado. Esta sección es solo para administradores.";
+    exit;
+}
 require "db.php";
 
 $placa = $_POST["placa"] ?? "";

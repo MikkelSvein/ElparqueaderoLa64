@@ -1,4 +1,38 @@
 <?php
+session_start();
+if (!isset($_SESSION['user'])) {
+    header('Location: login.php');
+    exit;
+}
+
+$user = $_SESSION['user'];
+$roles = $user['roles'] ?? [];
+$isAdmin = in_array('Administrador', $roles);
+?>
+
+<h1>Tarifas del Parqueadero</h1>
+<p>Bienvenido, <?php echo htmlspecialchars($user['name']); ?></p>
+
+<table border="1">
+    <tr><th>Tipo</th><th>Tarifa</th></tr>
+    <tr><td>Carro</td><td>$2000/h</td></tr>
+    <tr><td>Moto</td><td>$1000/h</td></tr>
+</table>
+
+<?php if ($isAdmin): ?>
+    <h2>Actualizar tarifas</h2>
+    <form action="configurar_tarifa.php" method="POST">
+        <label>Tipo de vehículo:</label>
+        <select name="tipo">
+            <option value="carro">Carro</option>
+            <option value="moto">Moto</option>
+        </select>
+        <label>Nueva tarifa:</label>
+        <input type="number" name="tarifa" required>
+        <button type="submit">Guardar</button>
+    </form>
+<?php endif; ?>
+<?php
 // php/tarifas.php
 ini_set('display_errors', 1); // Solo para desarrollo
 error_reporting(E_ALL);

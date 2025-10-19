@@ -1,4 +1,15 @@
 <?php
+session_start();
+if (!isset($_SESSION['user'])) {
+    header('Location: login.php');
+    exit;
+}
+
+$user = $_SESSION['user'];
+
+<h1>Consulta de vehículo</h1>
+<p>Bienvenido, <?php echo htmlspecialchars($user['name']); ?></p>
+
 require "db.php";
 
 $q = $_GET["q"] ?? "";
