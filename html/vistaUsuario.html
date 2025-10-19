@@ -20,12 +20,10 @@
 
   <!-- Barra de navegación -->
   <nav>
-    <a href="login.html">LOGIN</a>
-    <a href="register.html">REGISTER</a>
     <a href="vistaUsuario.html" class="active">HOME</a>
     <a href="#">RESERVA</a>
     <a href="#">MENSUALIDAD</a>
-    <button id="btnLogout">Cerrar sesión</button>
+    <button id="btnLogout" class="buttonLogout">Cerrar sesión</button>
   </nav>
 
   <!-- Contenido principal -->
@@ -61,22 +59,25 @@
   <script>
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-    const response = await fetch("../php/obtenerSesion.php");
+    const response = await fetch("../php/obtenerSesion.php", {
+      credentials: "include" // 👈 SIN ESTO, NO GUARDA SESIÓN
+    });
     const data = await response.json();
 
     if (!data.logged) {
-      window.location.href = "login.html"; // 🔒 Redirige si no hay sesión
+      window.location.href = "login.html";
       return;
     }
 
-    // ✅ Mostrar el nombre en la vista
-    document.querySelector(".bienvenido").textContent = "BIENVENIDO: " + data.nombre;
+    document.querySelector(".bienvenido").textContent =
+      "BIENVENIDO: " + data.nombre;
   } catch (error) {
     console.error("Error verificando la sesión:", error);
     window.location.href = "login.html";
   }
 });
 </script>
+
 <script>
 document.getElementById("btnLogout").addEventListener("click", async () => {
   const response = await fetch("../php/cerrarSesion.php");

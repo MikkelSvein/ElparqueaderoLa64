@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // 🔹 Datos de conexión
 $host = "localhost";
 $user = "root";

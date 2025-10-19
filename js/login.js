@@ -1,42 +1,40 @@
-document.getElementById('formLogin').addEventListener('submit', async function (e) {
-  e.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("formLogin");
 
-  const correo = document.getElementById('correo').value.trim();
-  const contrasena = document.getElementById('contrasena').value.trim();
-  const rol = document.getElementById('rol').value;
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-  if (!correo || !contrasena || !rol) {
-    alert("Por favor, complete todos los campos.");
-    return;
-  }
+    const correo = document.getElementById("correo").value.trim();
+    const contrasena = document.getElementById("contrasena").value.trim();
+    const rol = document.getElementById("rol").value.trim();
 
-  const formData = new FormData();
-  formData.append('correo', correo);
-  formData.append('contrasena', contrasena);
-  formData.append('rol', rol);
-
-  try {
-    const response = await fetch('../php/login.php', {
-      method: 'POST',
-      body: formData
-    });
-
-    const result = await response.json();
-
-    if (result.success) {
-      // ✅ Redirección según el rol
-      if (rol === 'usuario') {
-        window.location.href = '../html/vistaUsuario.html';
-      } else if (rol === 'admin') {
-        window.location.href = '../html/vistaAdmin.html';
-      }
-    } else {
-      alert(result.message || 'Credenciales incorrectas');
+    if (!correo || !contrasena || !rol) {
+      alert("Por favor, complete todos los campos.");
+      return;
     }
-  } catch (error) {
-    console.error(error);
-    alert('Error de conexión con el servidor.');
-  }
+
+    try {
+      const response = await fetch("../php/login.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        credentials: "include", // 👈 NECESARIO
+        body: new URLSearchParams({ correo, contrasena, rol }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        if (data.rol === "admin") {
+          window.location.href = "vistaAdmin.html";
+        } else {
+          window.location.href = "vistaUsuario.html";
+        }
+      } else {
+        alert("⚠️ " + data.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Error en la conexión con el servidor.");
+    }
+  });
 });
-
-

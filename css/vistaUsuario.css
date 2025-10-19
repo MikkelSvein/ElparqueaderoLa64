@@ -138,6 +138,18 @@ button {
 button:hover {
   background-color: #824ae6;
 }
+button.buttonLogout {
+  background-color: #6b40c4;
+  color: white;
+  border: none;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
 
 /* ==== Responsivo ==== */
 @media (max-width: 768px) {
