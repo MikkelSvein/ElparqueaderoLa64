@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Parqueadero La 64</title>
+  <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+  <header>
+    <div class="banner">
+      <h1>PARQUEADERO LA 64</h1>
+    </div>
+  </header>
+
+  <main class="login-container">
+    <form id="formLogin">
+      <h2>INICIAR SESIÓN</h2>
+
+      <label for="correo">Correo</label>
+      <input type="email" id="correo" name="correo" placeholder="Ingrese su correo" required>
+
+      <label for="contrasena">Contraseña</label>
+      <input type="password" id="contrasena" name="contrasena" placeholder="Ingrese su contraseña" required>
+
+      <label for="rol">Rol</label>
+      <select id="rol" name="rol" required>
+        <option value="">Seleccione un rol</option>
+        <option value="usuario">Usuario</option>
+        <option value="admin">Administrador</option>
+      </select>
+
+      <button type="submit" id="btnEntrar">Entrar</button>
+
+      <div class="divider">O</div>
+      <button type="button" id="btnGoogle" class="google-btn">Iniciar con Google</button>
+    </form>
+  </main>
+
+  <script src="../js/login.js"></script>
+</body>
+</html>
