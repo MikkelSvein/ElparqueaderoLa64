@@ -12,20 +12,15 @@
     <div class="logo">
       <center><a href="vistaUsuario.html"><img src="../recursos/banner.png"></a></center>
     </div>
-    <div class="user-section">
-      <span class="bienvenido">BIENVENIDO</span>
-      <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Usuario" class="user-icon">
-    </div>
   </header>
 
   <!-- Barra de navegación -->
   <nav>
     <a href="login.html">LOGIN</a>
     <a href="register.html">REGISTER</a>
-    <a href="vistaUsuario.html" class="active">HOME</a>
+    <a href="vistaInicial.html" class="active">HOME</a>
     <a href="#">RESERVA</a>
     <a href="#">MENSUALIDAD</a>
-    <button id="btnLogout">Cerrar sesión</button>
   </nav>
 
   <!-- Contenido principal -->
@@ -58,32 +53,5 @@
       </div>
     </section>
   </main>
-  <script>
-document.addEventListener("DOMContentLoaded", async () => {
-  try {
-    const response = await fetch("../php/obtenerSesion.php");
-    const data = await response.json();
-
-    if (!data.logged) {
-      window.location.href = "login.html"; // 🔒 Redirige si no hay sesión
-      return;
-    }
-
-    // ✅ Mostrar el nombre en la vista
-    document.querySelector(".bienvenido").textContent = "BIENVENIDO: " + data.nombre;
-  } catch (error) {
-    console.error("Error verificando la sesión:", error);
-    window.location.href = "login.html";
-  }
-});
-</script>
-<script>
-document.getElementById("btnLogout").addEventListener("click", async () => {
-  const response = await fetch("../php/cerrarSesion.php");
-  const data = await response.json();
-  if (data.success) window.location.href = "login.html";
-});
-</script>
-
 </body>
 </html>

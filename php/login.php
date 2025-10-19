@@ -1,7 +1,7 @@
 <?php
+session_start();
 header('Content-Type: application/json');
 
-// 🔹 Datos de conexión
 $host = "localhost";
 $user = "root";
 $pass = "";
@@ -14,7 +14,6 @@ if ($conn->connect_error) {
     exit;
 }
 
-// 🔹 Datos del formulario
 $correo = $_POST['correo'] ?? '';
 $contrasena = $_POST['contrasena'] ?? '';
 $rol = $_POST['rol'] ?? '';
@@ -24,22 +23,25 @@ if (empty($correo) || empty($contrasena) || empty($rol)) {
     exit;
 }
 
-// 🔹 Buscar usuario por correo
 $sql = "SELECT * FROM usuarios WHERE correo = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $correo);
 $stmt->execute();
 $result = $stmt->get_result();
 
-// 🔹 Validar usuario
 if ($result->num_rows > 0) {
     $user = $result->fetch_assoc();
 
-    // Verificar contraseña y rol
     if (password_verify($contrasena, $user['contrasena']) && $user['rol'] === $rol) {
-        echo json_encode(['success' => true, 'nombre' => $user['nombre']]);
+        // 🔹 Crear la sesión
+        $_SESSION['id'] = $user['id'];
+        $_SESSION['nombre'] = $user['nombre'];
+        $_SESSION['correo'] = $user['correo'];
+        $_SESSION['rol'] = $user['rol'];
+
+        echo json_encode(['success' => true, 'nombre' => $user['nombre'], 'rol' => $user['rol']]);
     } else {
-        echo json_encode(['success' => false, 'message' => 'Correo, rol o contraseña incorrectos.']);
+        echo json_encode(['success' => false, 'message' => 'Correo, contraseña o rol incorrectos.']);
     }
 } else {
     echo json_encode(['success' => false, 'message' => 'Usuario no encontrado.']);
