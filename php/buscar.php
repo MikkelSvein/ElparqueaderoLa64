@@ -7,7 +7,6 @@ if (!isset($_SESSION['user'])) {
 
 $user = $_SESSION['user'];
 
-<h1>Consulta de vehículo</h1>
 <p>Bienvenido, <?php echo htmlspecialchars($user['name']); ?></p>
 
 require "db.php";
