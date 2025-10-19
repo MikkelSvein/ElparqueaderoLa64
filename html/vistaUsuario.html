@@ -21,7 +21,7 @@
   <!-- Barra de navegación -->
   <nav>
     <a href="vistaUsuario.html" class="active">HOME</a>
-    <a href="#">RESERVA</a>
+    <a href="reservas.html">RESERVA</a>
     <a href="#">MENSUALIDAD</a>
     <button id="btnLogout" class="buttonLogout">Cerrar sesión</button>
   </nav>
@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 <script>
 document.getElementById("btnLogout").addEventListener("click", async () => {
-  const response = await fetch("../php/cerrarSesion.php");
+  const response = await fetch("../php/cerrarSesion.php", { credentials: "include" });
   const data = await response.json();
   if (data.success) window.location.href = "login.html";
 });

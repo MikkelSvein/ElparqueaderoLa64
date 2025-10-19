@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservar - Parqueadero La 64</title>
+  <link rel="stylesheet" href="../css/vistaUsuario.css">
+</head>
+<body>
+  <!-- Encabezado -->
+  <header>
+    <div class="logo">
+      <center><a href="vistaUsuario.html"><img src="../recursos/banner.png"></a></center>
+    </div>
+    <div class="user-section">
+      <span class="bienvenido">BIENVENIDO</span>
+      <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Usuario" class="user-icon">
+    </div>
+  </header>
+
+  <!-- Barra de navegación -->
+  <nav>
+    <a href="vistaUsuario.html">HOME</a>
+    <a href="reservas.html" class="active">RESERVA</a>
+    <a href="#">MENSUALIDAD</a>
+    <button id="btnLogout" class="buttonLogout">Cerrar sesión</button>
+  </nav>
+
+  <!-- Contenido principal -->
+  <main>
+    <section class="center">
+      <div class="card">
+        <h3>REALIZAR RESERVA</h3>
+
+        <form id="formReserva">
+          <label for="placa">Placa del vehículo:</label>
+          <input type="text" id="placa" name="placa" maxlength="8" required placeholder="Ej: ABC123">
+
+          <label for="fecha_entrada">Fecha de ingreso:</label>
+          <input type="datetime-local" id="fecha_entrada" name="fecha_entrada" required>
+
+          <label for="fecha_salida">Fecha de salida:</label>
+          <input type="datetime-local" id="fecha_salida" name="fecha_salida" required>
+
+          <button type="submit">Reservar</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Scripts -->
+  <script>
+  // 🔹 Verificar sesión y mostrar nombre
+  document.addEventListener("DOMContentLoaded", async () => {
+    try {
+      const response = await fetch("../php/obtenerSesion.php", { credentials: "include" });
+      const data = await response.json();
+
+      if (!data.logged) {
+        window.location.href = "login.html";
+        return;
+      }
+
+      document.querySelector(".bienvenido").textContent = "BIENVENIDO: " + data.nombre;
+
+      // Manejar el formulario
+      const form = document.getElementById("formReserva");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const placa = document.getElementById("placa").value.trim();
+        const fecha_entrada = document.getElementById("fecha_entrada").value;
+        const fecha_salida = document.getElementById("fecha_salida").value;
+
+        if (!placa || !fecha_entrada || !fecha_salida) {
+          alert("Por favor completa todos los campos.");
+          return;
+        }
+
+        const response = await fetch("../php/registrarReserva.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({ placa, fecha_entrada, fecha_salida }),
+          credentials: "include"
+        });
+
+        const result = await response.json();
+        alert(result.message);
+        if (result.status === "ok") {
+          form.reset();
+        }
+      });
+    } catch (error) {
+      console.error("Error verificando la sesión:", error);
+      window.location.href = "login.html";
+    }
+  });
+
+  // 🔹 Cerrar sesión
+  document.getElementById("btnLogout").addEventListener("click", async () => {
+    const response = await fetch("../php/cerrarSesion.php", { credentials: "include" });
+    const data = await response.json();
+    if (data.success) window.location.href = "login.html";
+  });
+  </script>
+  <script src="../js/reserva.js"></script>
+</body>
+</html>
