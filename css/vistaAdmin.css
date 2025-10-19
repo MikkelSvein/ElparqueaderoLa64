@@ -5,11 +5,37 @@ body {
     padding: 0;
 }
 
+/* ==== Encabezado ==== */
 header {
-    background-color: #222;
-    color: white;
-    padding: 10px;
-    text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #1a1a1a, #45166b, #122);
+  padding: 15px 30px;
+}
+
+header .logo h1 {
+  font-size: 1.8rem;
+  color: #fff;
+  letter-spacing: 2px;
+}
+
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-section .bienvenido {
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.user-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: #333;
 }
 
 main {
@@ -37,12 +63,12 @@ input, select, button {
 }
 
 button {
-    background-color: green;
+    background-color: #6b40c4;
     color: white;
     border: none;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: darkgreen;
+    background-color: #6b40c4;
 }
