@@ -39,7 +39,4 @@ document.getElementById('formLogin').addEventListener('submit', async function (
   }
 });
 
-// Google Login (opcional)
-document.getElementById('btnGoogle').addEventListener('click', () => {
-  alert("Inicio con Google en desarrollo. Puedes integrar Firebase Auth o Google API aquí.");
-});
+
