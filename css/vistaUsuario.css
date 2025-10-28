@@ -1,0 +1,164 @@
+/* ==== Estilos generales ==== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background-color: #111;
+  color: white;
+}
+
+/* ==== Encabezado ==== */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(90deg, #1a1a1a, #45166b, #122);
+  padding: 15px 30px;
+}
+
+header .logo h1 {
+  font-size: 1.8rem;
+  color: #fff;
+  letter-spacing: 2px;
+}
+
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-section .bienvenido {
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.user-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: #333;
+}
+
+/* ==== Barra de navegación ==== */
+nav {
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  padding: 10px 0;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: color 0.3s;
+}
+
+nav a:hover,
+nav a.active {
+  color: #9148e9;
+}
+
+/* ==== Contenido principal ==== */
+main {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin: 40px 20px;
+}
+
+/* ==== Tarjetas ==== */
+.card {
+  background-color: #1b1b1b;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+  text-align: center;
+  width: 250px;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
+}
+
+.card h3 {
+  background-color: #2d2d2d;
+  color: #9a6dfc;
+  padding: 8px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+/* ==== Ubicación ==== */
+.mapa {
+  width: 100%;
+  border-radius: 5px;
+}
+
+/* ==== WhatsApp ==== */
+.whatsapp {
+  width: 60px;
+  margin-top: 10px;
+}
+
+/* ==== Disponibilidad ==== */
+.disponibilidad .numero {
+  font-size: 4rem;
+  margin: 10px 0;
+}
+
+.disponibilidad .porcentaje {
+  font-size: 1.5rem;
+  background-color: #9a6dfc;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 0;
+}
+
+/* ==== Botones ==== */
+button {
+  background-color: #6b40c4;
+  color: white;
+  border: none;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #824ae6;
+}
+button.buttonLogout {
+  background-color: #6b40c4;
+  color: white;
+  border: none;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* ==== Responsivo ==== */
+@media (max-width: 768px) {
+  main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 90%;
+  }
+}
