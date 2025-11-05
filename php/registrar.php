@@ -1,5 +1,5 @@
 <?php
-sesion_start();
+session_start();
 require "db.php";
 
 $placa = $_POST["placa"] ?? "";
