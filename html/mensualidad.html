@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mensualidad - Parqueadero La 64</title>
+  <link rel="stylesheet" href="../css/vistaUsuario.css">
+  <link rel="stylesheet" href="../css/mensualidad.css">
+</head>
+<body>
+  <!-- Encabezado -->
+  <header>
+    <div class="logo">
+      <center><a href="vistaUsuario.html"><img src="../recursos/banner.png"></a></center>
+    </div>
+    <div class="user-section">
+      <span class="bienvenido">BIENVENIDO</span>
+      <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Usuario" class="user-icon">
+    </div>
+  </header>
+
+  <!-- Barra de navegación -->
+  <nav>
+    <a href="vistaUsuario.html">HOME</a>
+    <a href="reservas.html">RESERVA</a>
+    <a href="mensualidad.html" class="active">MENSUALIDAD</a>
+    <button id="btnLogout" class="buttonLogout">Cerrar sesión</button>
+  </nav>
+
+  <!-- Contenido principal -->
+  <main class="mensualidad-main">
+    <h1 class="titulo-mensualidad">ADQUIERE TU MENSUALIDAD</h1>
+    <p class="subtitulo">Selecciona el tipo de vehículo y método de pago</p>
+
+    <!-- Cards de tipos de vehículo -->
+    <div class="vehiculos-grid">
+      <div class="vehiculo-card" data-tipo="Carro">
+        <img src="../recursos/carro.png" alt="Carro" class="vehiculo-imagen">
+        <h3>AUTOMÓVIL</h3>
+        <p class="precio" id="precio-carro">$0/mes</p>
+        <button class="btn-seleccionar" onclick="seleccionarVehiculo('Carro')">Seleccionar</button>
+      </div>
+
+      <div class="vehiculo-card" data-tipo="Moto">
+        <img src="../recursos/moto.png" alt="Moto" class="vehiculo-imagen">
+        <h3>MOTO</h3>
+        <p class="precio" id="precio-moto">$0/mes</p>
+        <button class="btn-seleccionar" onclick="seleccionarVehiculo('Moto')">Seleccionar</button>
+      </div>
+
+      <div class="vehiculo-card" data-tipo="Bicicleta">
+        <img src="../recursos/bicicleta.png" alt="Bicicleta" class="vehiculo-imagen">
+        <h3>BICICLETA</h3>
+        <p class="precio" id="precio-bicicleta">$0/mes</p>
+        <button class="btn-seleccionar" onclick="seleccionarVehiculo('Bicicleta')">Seleccionar</button>
+      </div>
+
+      <div class="vehiculo-card" data-tipo="Bus">
+        <img src="../recursos/bus.png" alt="Bus" class="vehiculo-imagen">
+        <h3>BUS</h3>
+        <p class="precio" id="precio-bus">$0/mes</p>
+        <button class="btn-seleccionar" onclick="seleccionarVehiculo('Bus')">Seleccionar</button>
+      </div>
+    </div>
+
+    <!-- Modal de pago -->
+    <div id="modalPago" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="cerrarModal()">&times;</span>
+        <h2>Procesar Pago - Mensualidad</h2>
+        
+        <div class="resumen-compra">
+          <h3>Resumen de compra</h3>
+          <p><strong>Tipo de vehículo:</strong> <span id="resumen-tipo"></span></p>
+          <p><strong>Precio mensual:</strong> <span id="resumen-precio"></span></p>
+        </div>
+
+        <form id="formPago">
+          <div class="metodos-pago">
+            <h3>Método de pago</h3>
+            
+            <label class="metodo-pago">
+              <input type="radio" name="metodo" value="efectivo" checked>
+              <div class="metodo-option">
+                <span class="metodo-icon">💵</span>
+                <span class="metodo-nombre">Efectivo</span>
+                <span class="metodo-disponible">Disponible</span>
+              </div>
+            </label>
+
+            <label class="metodo-pago">
+              <input type="radio" name="metodo" value="nequi">
+              <div class="metodo-option">
+                <span class="metodo-icon">📱</span>
+                <span class="metodo-nombre">Nequi</span>
+                <span class="metodo-no-disponible">No disponible aún</span>
+              </div>
+            </label>
+
+            <label class="metodo-pago">
+              <input type="radio" name="metodo" value="tarjeta">
+              <div class="metodo-option">
+                <span class="metodo-icon">💳</span>
+                <span class="metodo-nombre">Tarjeta</span>
+                <span class="metodo-no-disponible">No disponible aún</span>
+              </div>
+            </label>
+          </div>
+
+          <div id="formulario-efectivo" class="formulario-metodo">
+            <label for="placa-vehiculo">Placa del vehículo:</label>
+            <input type="text" id="placa-vehiculo" name="placa" maxlength="8" required placeholder="Ej: ABC123">
+            
+            <label for="telefono">Teléfono de contacto:</label>
+            <input type="tel" id="telefono" name="telefono" required placeholder="Ej: 3001234567">
+            
+            <p class="info-pago">💰 Presenta este código en nuestras instalaciones para completar el pago en efectivo.</p>
+            <div class="codigo-pago" id="codigo-pago"></div>
+          </div>
+
+          <div class="botones-pago">
+            <button type="button" class="btn-cancelar" onclick="cerrarModal()">Cancelar</button>
+            <button type="submit" class="btn-pagar">Procesar Pago</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <script>
+  // 🔹 Verificar sesión y mostrar nombre
+  document.addEventListener("DOMContentLoaded", async () => {
+    try {
+      const response = await fetch("../php/obtenerSesion.php", { credentials: "include" });
+      const data = await response.json();
+
+      if (!data.logged) {
+        window.location.href = "login.html";
+        return;
+      }
+
+      document.querySelector(".bienvenido").textContent = "BIENVENIDO: " + data.nombre;
+      
+      // Cargar precios de mensualidad
+      await cargarPreciosMensualidad();
+    } catch (error) {
+      console.error("Error verificando la sesión:", error);
+      window.location.href = "login.html";
+    }
+  });
+
+  // 🔹 Cerrar sesión
+  document.getElementById("btnLogout").addEventListener("click", async () => {
+    const response = await fetch("../php/cerrarSesion.php", { credentials: "include" });
+    const data = await response.json();
+    if (data.success) window.location.href = "login.html";
+  });
+  </script>
+  <script src="../js/mensualidad.js"></script>
+</body>
+</html>
+

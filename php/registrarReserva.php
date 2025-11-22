@@ -16,7 +16,7 @@ if ($conn->connect_error) {
 }
 
 // 🔹 Recibir datos del formulario
-$usuario_id = $_SESSION['usuario_id'];
+$usuario_id = $_SESSION['id'];
 $nombre_usuario = $_SESSION['nombre'];
 $placa = $_POST['placa'] ?? '';
 $fecha_entrada = $_POST['fecha_entrada'] ?? '';

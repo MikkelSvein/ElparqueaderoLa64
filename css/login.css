@@ -16,7 +16,8 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 85vh;
+  min-height: 85vh;
+  padding: 40px 20px;
 }
 
 form {
@@ -28,6 +29,15 @@ form {
   flex-direction: column;
   gap: 12px;
   box-shadow: 0 0 15px rgba(255,255,255,0.1);
+}
+
+/* Los formularios dentro de acceso-card no necesitan fondo adicional */
+.acceso-card form {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  width: 100%;
 }
 
 h2 {
@@ -64,4 +74,86 @@ button:hover {
   text-align: center;
   color: #aaa;
   margin: 10px 0;
+}
+
+/* ==== Estilos para Tabs (sin cambiar estilos originales) ==== */
+.acceso-card {
+  background-color: #1e1e1e;
+  padding: 30px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 650px;
+  box-shadow: 0 0 15px rgba(255,255,255,0.1);
+  margin: 0 auto;
+}
+
+.acceso-card h2 {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.subtitle-acceso {
+  text-align: center;
+  color: #aaa;
+  font-size: 12px;
+  margin-bottom: 20px;
+}
+
+.tabs-container {
+  display: flex;
+  gap: 0;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #333;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 10px;
+  background: transparent;
+  border: none;
+  color: #aaa;
+  cursor: pointer;
+  font-size: 14px;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.3s;
+}
+
+.tab-btn:hover {
+  color: #fff;
+}
+
+.tab-btn.active {
+  color: #6a0dad;
+  border-bottom-color: #6a0dad;
+  font-weight: bold;
+}
+
+/* Contenedor de formularios con transición */
+.forms-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 450px;
+}
+
+.form-tab {
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  width: 100%;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Formulario activo visible */
+.form-tab.active {
+  display: flex;
+  opacity: 1;
+  transform: translateX(0);
 }

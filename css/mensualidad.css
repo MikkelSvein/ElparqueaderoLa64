@@ -1,0 +1,333 @@
+/* ==== Vista de Mensualidad ==== */
+.mensualidad-main {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.titulo-mensualidad {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #9a6dfc;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.subtitulo {
+  text-align: center;
+  color: #aaa;
+  margin-bottom: 40px;
+  font-size: 1.1rem;
+}
+
+/* ==== Grid de Vehículos ==== */
+.vehiculos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.vehiculo-card {
+  background: linear-gradient(135deg, #1b1b1b 0%, #2d2d2d 100%);
+  border-radius: 15px;
+  padding: 30px 20px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.vehiculo-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(154, 109, 252, 0.3);
+  border-color: #9a6dfc;
+}
+
+.vehiculo-card.selected {
+  border-color: #9a6dfc;
+  background: linear-gradient(135deg, #2d1b3d 0%, #3d2b4d 100%);
+  box-shadow: 0 10px 30px rgba(154, 109, 252, 0.5);
+}
+
+.vehiculo-imagen {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 5px 15px rgba(154, 109, 252, 0.3));
+}
+
+.vehiculo-card h3 {
+  color: #9a6dfc;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.precio {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #4caf50;
+  margin-bottom: 20px;
+}
+
+.btn-seleccionar {
+  background: linear-gradient(135deg, #6b40c4 0%, #824ae6 100%);
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  width: 100%;
+}
+
+.btn-seleccionar:hover {
+  background: linear-gradient(135deg, #824ae6 0%, #9a6dfc 100%);
+  transform: scale(1.05);
+}
+
+/* ==== Modal de Pago ==== */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  overflow-y: auto;
+}
+
+.modal-content {
+  background-color: #1b1b1b;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 600px;
+  border: 2px solid #9a6dfc;
+  box-shadow: 0 10px 40px rgba(154, 109, 252, 0.3);
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close:hover {
+  color: #9a6dfc;
+}
+
+.modal-content h2 {
+  color: #9a6dfc;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* ==== Resumen de Compra ==== */
+.resumen-compra {
+  background-color: #2d2d2d;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 25px;
+}
+
+.resumen-compra h3 {
+  color: #9a6dfc;
+  margin-bottom: 15px;
+}
+
+.resumen-compra p {
+  margin: 10px 0;
+  color: #ddd;
+}
+
+.resumen-compra strong {
+  color: #fff;
+}
+
+/* ==== Métodos de Pago ==== */
+.metodos-pago {
+  margin-bottom: 25px;
+}
+
+.metodos-pago h3 {
+  color: #9a6dfc;
+  margin-bottom: 15px;
+}
+
+.metodo-pago {
+  display: block;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.metodo-pago input[type="radio"] {
+  display: none;
+}
+
+.metodo-option {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: #2d2d2d;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  transition: all 0.3s;
+}
+
+.metodo-pago input[type="radio"]:checked + .metodo-option {
+  border-color: #9a6dfc;
+  background-color: #2d1b3d;
+}
+
+.metodo-icon {
+  font-size: 2rem;
+  margin-right: 15px;
+}
+
+.metodo-nombre {
+  flex: 1;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.metodo-disponible {
+  color: #4caf50;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.metodo-no-disponible {
+  color: #f44336;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+/* ==== Formulario de Pago ==== */
+.formulario-metodo {
+  margin-top: 20px;
+}
+
+.formulario-metodo label {
+  display: block;
+  color: #ddd;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.formulario-metodo input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 2px solid #333;
+  border-radius: 8px;
+  background-color: #2d2d2d;
+  color: #fff;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.formulario-metodo input:focus {
+  outline: none;
+  border-color: #9a6dfc;
+}
+
+.info-pago {
+  background-color: #2d2d2d;
+  padding: 15px;
+  border-radius: 8px;
+  color: #ddd;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.codigo-pago {
+  background: linear-gradient(135deg, #1b1b1b 0%, #2d2d2d 100%);
+  border: 2px dashed #9a6dfc;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 15px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #9a6dfc;
+  letter-spacing: 5px;
+  font-family: 'Courier New', monospace;
+}
+
+/* ==== Botones de Pago ==== */
+.botones-pago {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.btn-cancelar,
+.btn-pagar {
+  flex: 1;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-cancelar {
+  background-color: #444;
+  color: #fff;
+}
+
+.btn-cancelar:hover {
+  background-color: #555;
+}
+
+.btn-pagar {
+  background: linear-gradient(135deg, #6b40c4 0%, #824ae6 100%);
+  color: white;
+}
+
+.btn-pagar:hover {
+  background: linear-gradient(135deg, #824ae6 0%, #9a6dfc 100%);
+  transform: scale(1.02);
+}
+
+.btn-pagar:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ==== Responsivo ==== */
+@media (max-width: 768px) {
+  .vehiculos-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-content {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .titulo-mensualidad {
+    font-size: 2rem;
+  }
+
+  .botones-pago {
+    flex-direction: column;
+  }
+}
+

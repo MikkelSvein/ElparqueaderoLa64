@@ -49,6 +49,7 @@ nav {
   background-color: #000;
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 25px;
   padding: 10px 0;
 }
@@ -142,13 +143,67 @@ button.buttonLogout {
   background-color: #6b40c4;
   color: white;
   border: none;
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
+  width: auto;
+  padding: 8px 16px;
+  margin: 0;
+  margin-left: 15px;
   border-radius: 5px;
   font-weight: bold;
   cursor: pointer;
   transition: 0.3s;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+/* ==== Tabla de Reservas ==== */
+.tabla-reservas {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background-color: #1b1b1b;
+}
+
+.tabla-reservas thead {
+  background-color: #2d2d2d;
+}
+
+.tabla-reservas th {
+  padding: 12px;
+  text-align: left;
+  color: #9a6dfc;
+  font-weight: bold;
+  border-bottom: 2px solid #9148e9;
+}
+
+.tabla-reservas td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #333;
+  color: #ddd;
+}
+
+.tabla-reservas tbody tr:hover {
+  background-color: #252525;
+}
+
+.tabla-reservas tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.btn-eliminar {
+  background-color: #c44;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background-color 0.3s;
+  width: auto;
+  margin: 0;
+}
+
+.btn-eliminar:hover {
+  background-color: #e55;
 }
 
 /* ==== Responsivo ==== */
@@ -160,5 +215,19 @@ button.buttonLogout {
 
   .card {
     width: 90%;
+  }
+
+  .tabla-reservas {
+    font-size: 0.85rem;
+  }
+
+  .tabla-reservas th,
+  .tabla-reservas td {
+    padding: 8px 6px;
+  }
+
+  .btn-eliminar {
+    padding: 4px 8px;
+    font-size: 0.75rem;
   }
 }

@@ -22,7 +22,7 @@
   <nav>
     <a href="vistaUsuario.html">HOME</a>
     <a href="reservas.html" class="active">RESERVA</a>
-    <a href="#">MENSUALIDAD</a>
+    <a href="mensualidad.html">MENSUALIDAD</a>
     <button id="btnLogout" class="buttonLogout">Cerrar sesión</button>
   </nav>
 
@@ -46,6 +46,15 @@
         </form>
       </div>
     </section>
+
+    <section class="center" style="width: 100%; max-width: 800px; margin-top: 20px;">
+      <div class="card" style="width: 100%;">
+        <h3>MIS RESERVAS</h3>
+        <div id="listaReservas" style="margin-top: 15px;">
+          <p style="color: #888; text-align: center;">Cargando reservas...</p>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- Scripts -->
@@ -62,34 +71,6 @@
       }
 
       document.querySelector(".bienvenido").textContent = "BIENVENIDO: " + data.nombre;
-
-      // Manejar el formulario
-      const form = document.getElementById("formReserva");
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const placa = document.getElementById("placa").value.trim();
-        const fecha_entrada = document.getElementById("fecha_entrada").value;
-        const fecha_salida = document.getElementById("fecha_salida").value;
-
-        if (!placa || !fecha_entrada || !fecha_salida) {
-          alert("Por favor completa todos los campos.");
-          return;
-        }
-
-        const response = await fetch("../php/registrarReserva.php", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams({ placa, fecha_entrada, fecha_salida }),
-          credentials: "include"
-        });
-
-        const result = await response.json();
-        alert(result.message);
-        if (result.status === "ok") {
-          form.reset();
-        }
-      });
     } catch (error) {
       console.error("Error verificando la sesión:", error);
       window.location.href = "login.html";

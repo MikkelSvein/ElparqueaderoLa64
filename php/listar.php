@@ -11,9 +11,15 @@ $paginas = ceil($total / $por_pagina);
 
 $result = $conn->query("SELECT * FROM vehiculos LIMIT $inicio, $por_pagina");
 
-echo "<table border='1'><tr><th>Placa</th><th>Nombre</th><th>Documento</th><th>Tipo</th></tr>";
+echo "<table border='1' style='width:100%; border-collapse:collapse;'><tr><th>Placa</th><th>Nombre</th><th>Documento</th><th>Tipo</th><th>Acción</th></tr>";
 while($row = $result->fetch_assoc()) {
-    echo "<tr><td>{$row['placa']}</td><td>{$row['nombre']}</td><td>{$row['documento']}</td><td>{$row['tipo']}</td></tr>";
+    echo "<tr>
+        <td>{$row['placa']}</td>
+        <td>{$row['nombre']}</td>
+        <td>{$row['documento']}</td>
+        <td>{$row['tipo']}</td>
+        <td><button class='btn-salida' onclick='registrarSalida({$row['id']})'>Registrar Salida</button></td>
+    </tr>";
 }
 echo "</table>";
 

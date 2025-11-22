@@ -90,3 +90,125 @@ button {
 button:hover {
   background-color: #5433a9;
 }
+
+/* ==== Botón de Cerrar Sesión ==== */
+button.buttonLogout {
+  background-color: #6b40c4;
+  color: white;
+  border: none;
+  width: auto;
+  padding: 8px 16px;
+  margin: 0;
+  margin-left: 15px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+button.buttonLogout:hover {
+  background-color: #824ae6;
+}
+
+/* ==== Barra de navegación (si se agrega) ==== */
+nav {
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  padding: 10px 0;
+}
+
+/* ==== Sección de Reservas Admin ==== */
+section.reservas-admin {
+  min-width: 100%;
+  max-width: 100%;
+  background-color: #f9f9f9;
+  color: #222;
+}
+
+/* ==== Tabla de Reservas Admin ==== */
+.tabla-reservas-admin {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background-color: white;
+  font-size: 0.9rem;
+}
+
+.tabla-reservas-admin thead {
+  background-color: #45166b;
+  color: white;
+}
+
+.tabla-reservas-admin th {
+  padding: 12px 8px;
+  text-align: left;
+  font-weight: bold;
+  border-bottom: 2px solid #6b40c4;
+}
+
+.tabla-reservas-admin td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #ddd;
+  color: #222;
+}
+
+.tabla-reservas-admin tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+.tabla-reservas-admin tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ==== Botones de Acción ==== */
+.btn-salida {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background-color 0.3s;
+  margin-right: 5px;
+}
+
+.btn-salida:hover {
+  background-color: #45a049;
+}
+
+.btn-eliminar-admin {
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background-color 0.3s;
+}
+
+.btn-eliminar-admin:hover {
+  background-color: #da190b;
+}
+
+/* ==== Responsivo ==== */
+@media (max-width: 768px) {
+  section.reservas-admin {
+    overflow-x: auto;
+  }
+  
+  .tabla-reservas-admin {
+    font-size: 0.75rem;
+  }
+
+  .tabla-reservas-admin th,
+  .tabla-reservas-admin td {
+    padding: 6px 4px;
+  }
+}
