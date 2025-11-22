@@ -76,3 +76,4 @@ if ($metodo_pago === 'efectivo') {
 $conn->close();
 ?>
 
+
