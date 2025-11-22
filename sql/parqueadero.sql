@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-10-2025 a las 01:42:45
+-- Tiempo de generación: 22-11-2025 a las 03:03:50
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -56,6 +56,13 @@ CREATE TABLE `reservas` (
   `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `reservas`
+--
+
+INSERT INTO `reservas` (`id`, `usuario_id`, `nombre_usuario`, `placa`, `fecha_entrada`, `fecha_salida`, `fecha_registro`) VALUES
+(4, 5, 'juan rojas', 'LIK341', '2025-11-21 20:42:00', '2025-11-22 20:42:00', '2025-11-22 01:42:42');
+
 -- --------------------------------------------------------
 
 --
@@ -75,7 +82,7 @@ CREATE TABLE `tarifas` (
 --
 
 INSERT INTO `tarifas` (`id`, `bicicleta`, `bus`, `carro`, `moto`) VALUES
-(1, 0, 0, 0, 0);
+(1, 500, 5000, 2500, 1000);
 
 -- --------------------------------------------------------
 
@@ -96,9 +103,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `contrasena`, `rol`) VALUES
-(1, 'Administrador', 'admin@parqueadero.com', '123', 'admin'),
-(2, 'Usuario Ejemplo', 'usuario@parqueadero.com', '123', 'usuario'),
-(4, 'miguel suarez', 'miguel@gmail.com', '$2y$10$AR2kKZgVCj1MPBwsm4mwougiEDZKMyHV5CEanuJSVQ49lkCyfqxkm', 'usuario');
+(4, 'miguel suarez', 'miguel@gmail.com', '$2y$10$AR2kKZgVCj1MPBwsm4mwougiEDZKMyHV5CEanuJSVQ49lkCyfqxkm', 'admin'),
+(5, 'juan rojas', 'juan@gmail.com', '$2y$10$mwzy4mZneaFIeTyVt8OI7etdW88E1xIKjGM9H0W3Ze22AMdbH7FoO', 'usuario');
 
 -- --------------------------------------------------------
 
@@ -111,8 +117,17 @@ CREATE TABLE `vehiculos` (
   `placa` varchar(10) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `documento` varchar(20) NOT NULL,
-  `tipo` varchar(20) NOT NULL
+  `tipo` varchar(20) NOT NULL,
+  `fecha_entrada` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `vehiculos`
+--
+
+INSERT INTO `vehiculos` (`id`, `placa`, `nombre`, `documento`, `tipo`, `fecha_entrada`) VALUES
+(6, 'LIK341', 'juan rojas', '1032679106', 'Carro', '2025-11-22 02:46:15'),
+(7, 'DCU179', 'SAMUEL', '1111111', 'Carro', '2025-11-22 02:46:42');
 
 --
 -- Índices para tablas volcadas
@@ -163,19 +178,19 @@ ALTER TABLE `disponibilidad`
 -- AUTO_INCREMENT de la tabla `reservas`
 --
 ALTER TABLE `reservas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `vehiculos`
 --
 ALTER TABLE `vehiculos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
