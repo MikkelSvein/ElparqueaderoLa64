@@ -175,3 +175,21 @@ button:hover {
   opacity: 1;
   transform: translateX(0);
 }
+
+.google-button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin: 10px auto 0 auto;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+
+  background-color: #6a0dad;
+  border: 1px solid #6a0dad;
+}
+
+.google-button i {
+  margin-right: 8px;
+}

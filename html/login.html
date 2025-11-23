@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - Parqueadero La 64</title>
   <link rel="stylesheet" href="../css/login.css">
+  <script src="../js/main.js" defer type="module"></script>
 </head>
+
 <body>
   <header>
     <div class="banner">
@@ -17,16 +20,16 @@
     <div class="acceso-card">
       <h2>ACCESO</h2>
       <p class="subtitle-acceso">Inicia sesión o crea tu cuenta para comenzar</p>
-        <center><a class="back-btn" href="vistaInicial.html">← Volver</a></center>
-      <!-- Tabs -->
+      <center><a class="back-btn" href="vistaInicial.html">← Volver</a></center>
+
       <div class="tabs-container">
         <button class="tab-btn active" id="tabLogin" onclick="cambiarTab('login')">Iniciar Sesión</button>
         <button class="tab-btn" id="tabRegister" onclick="cambiarTab('register')">Registrarse</button>
       </div>
 
-      <!-- Contenedor de formularios lado a lado -->
       <div class="forms-wrapper">
-        <!-- Formulario de Login -->
+
+        <!-- Formulario de login -->
         <form id="formLogin" class="form-tab active">
           <label for="correo">Correo</label>
           <input type="email" id="correo" name="correo" placeholder="Ingrese su correo" required>
@@ -44,10 +47,13 @@
           <button type="submit" id="btnEntrar">Iniciar Sesión</button>
 
           <div class="divider">O</div>
-          <button type="button" id="btnGoogle" class="google-btn">Iniciar con Google</button>
+
+          <button id="google-login-btn" class="google-button" type="button">
+            <i class="fab fa-google"></i> Iniciar sesión con Google
+          </button>
         </form>
 
-        <!-- Formulario de Registro -->
+        <!-- Formulario de register -->
         <form id="formRegister" class="form-tab">
           <label for="nombre-register">Nombre completo</label>
           <input type="text" id="nombre-register" name="nombre" placeholder="Ingrese su nombre" required>
@@ -60,10 +66,12 @@
 
           <button type="submit" id="btnRegistrar">Registrarse</button>
         </form>
+
       </div>
     </div>
   </main>
 
   <script src="../js/acceso.js"></script>
 </body>
+
 </html>

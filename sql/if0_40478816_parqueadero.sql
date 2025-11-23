@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `if0_40478816_parqueadero`
+-- Base de datos: `parqueadero`
 --
 
 -- --------------------------------------------------------
@@ -95,8 +95,9 @@ CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `correo` varchar(100) NOT NULL,
-  `contrasena` varchar(255) NOT NULL,
-  `rol` enum('usuario','admin') DEFAULT 'usuario'
+  `contrasena` varchar(255) NULL,
+  `rol` enum('usuario','admin') DEFAULT 'usuario',
+  `firebase_uid` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
