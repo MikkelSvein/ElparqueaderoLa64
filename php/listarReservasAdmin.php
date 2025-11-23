@@ -9,7 +9,7 @@ if (!isset($_SESSION['id']) || !isset($_SESSION['rol']) || $_SESSION['rol'] !== 
 }
 
 // 🔹 Conexión a la base de datos
-$conn = new mysqli("localhost", "root", "", "parqueadero");
+$conn = new mysqli("sql302.infinityfree.com", "if0_40478816", "ingSoftware2", "if0_40478816_parqueadero");
 if ($conn->connect_error) {
   echo json_encode(["status" => "error", "message" => "Error al conectar con la base de datos."]);
   exit;

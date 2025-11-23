@@ -2,10 +2,10 @@
 session_start();
 
 // 🔹 Datos de conexión
-$host = "localhost";
-$user = "root";
-$pass = "";
-$dbname = "parqueadero"; // 👈 asegúrate de que sea el nombre correcto
+$host = "sql302.infinityfree.com";
+$user = "if0_40478816";
+$pass = "ingSoftware2";
+$dbname = "if0_40478816_parqueadero"; 
 
 $conn = new mysqli($host, $user, $pass, $dbname);
 
