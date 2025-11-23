@@ -25,6 +25,18 @@ $fecha_entrada = date('Y-m-d H:i:s');
 $exito = false;
 $mensaje = "";
 
+// Verificar cupos disponibles
+$cupos = 0;
+$resDisp = $conn->query("SELECT cupos_disponibles, total_cupos FROM disponibilidad WHERE id = 1");
+if ($resDisp && $row = $resDisp->fetch_assoc()) {
+    $cupos = intval($row['cupos_disponibles']);
+}
+if ($cupos <= 0) {
+    echo "No hay cupos disponibles.";
+    $conn->close();
+    exit;
+}
+
 if ($campo_existe) {
     // Insertar con fecha_entrada
     $stmt = $conn->prepare("INSERT INTO vehiculos (placa, nombre, documento, tipo, fecha_entrada) VALUES (?, ?, ?, ?, ?)");
@@ -33,6 +45,8 @@ if ($campo_existe) {
         if ($stmt->execute()) {
             $exito = true;
             $mensaje = "Vehículo registrado con éxito.";
+            // Descontar 1 cupo
+            $conn->query("UPDATE disponibilidad SET cupos_disponibles = cupos_disponibles - 1 WHERE id = 1");
         } else {
             $mensaje = "Error: " . $stmt->error;
         }
@@ -48,6 +62,8 @@ if ($campo_existe) {
         if ($stmt->execute()) {
             $exito = true;
             $mensaje = "Vehículo registrado con éxito.";
+            // Descontar 1 cupo
+            $conn->query("UPDATE disponibilidad SET cupos_disponibles = cupos_disponibles - 1 WHERE id = 1");
         } else {
             $mensaje = "Error: " . $stmt->error;
         }

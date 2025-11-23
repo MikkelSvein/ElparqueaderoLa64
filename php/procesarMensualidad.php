@@ -39,16 +39,34 @@ if ($metodo_pago === 'nequi' || $metodo_pago === 'tarjeta') {
 // 🔹 Generar código de referencia único
 $codigo_referencia = 'MEN-' . time() . '-' . strtoupper(substr(uniqid(), -6));
 
-// 🔹 En un sistema real, aquí se guardaría en una tabla de mensualidades
-// Por ahora, solo simulamos el proceso exitoso
-// Podrías crear una tabla: mensualidades (id, usuario_id, tipo_vehiculo, placa, telefono, precio, metodo_pago, codigo_referencia, fecha_inicio, fecha_fin, estado, fecha_registro)
+// Crear tabla mensualidades si no existe
+$conn->query("CREATE TABLE IF NOT EXISTS mensualidades (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  usuario_id INT NULL,
+  nombre_usuario VARCHAR(100) NULL,
+  tipo_vehiculo VARCHAR(20) NOT NULL,
+  placa VARCHAR(10) NOT NULL,
+  telefono VARCHAR(20) NOT NULL,
+  precio INT NOT NULL,
+  metodo_pago VARCHAR(20) NOT NULL,
+  codigo_referencia VARCHAR(50) NOT NULL,
+  fecha_inicio DATE NOT NULL,
+  fecha_fin DATE NOT NULL,
+  estado VARCHAR(20) NOT NULL DEFAULT 'pendiente',
+  fecha_registro TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
 
-// Simulación de registro exitoso
+// Fechas de vigencia
 $fecha_inicio = date('Y-m-d');
 $fecha_fin = date('Y-m-d', strtotime('+1 month'));
 
 // 🔹 Mensaje de éxito según método de pago
 if ($metodo_pago === 'efectivo') {
+  // Guardar mensualidad en BD (estado pendiente hasta confirmar pago)
+  $stmt = $conn->prepare("INSERT INTO mensualidades (usuario_id, nombre_usuario, tipo_vehiculo, placa, telefono, precio, metodo_pago, codigo_referencia, fecha_inicio, fecha_fin, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pendiente')");
+  $stmt->bind_param("issssissss", $usuario_id, $nombre_usuario, $tipo_vehiculo, $placa, $telefono, $precio, $metodo_pago, $codigo_referencia, $fecha_inicio, $fecha_fin);
+  $stmt->execute();
+
   $mensaje = "Solicitud de mensualidad registrada correctamente.\n\n";
   $mensaje .= "Código de referencia: " . $codigo_referencia . "\n";
   $mensaje .= "Presenta este código en nuestras instalaciones para completar el pago en efectivo.\n";

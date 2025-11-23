@@ -7,12 +7,14 @@
     <link rel="stylesheet" href="../css/vistaAdmin.css">
 </head>
 <body>
-     <header>
-    <div class="logo">
-      <center><a href="vistaAdmin.html"><img src="../recursos/banner.png"></a></center>
-        <a href = "vistaUsuario.html"><button>volver al inicio</button></a>
-    </div>
-  </header>
+    <header>
+      <div class="logo">
+        <center><a href="vistaAdmin.html"><img src="../recursos/banner.png"></a></center>
+      </div>
+      <nav>
+        <a href="vistaUsuario.html" class="nav-link">Volver al inicio</a>
+      </nav>
+    </header>
 
     <main>
         <section class="registro">
@@ -59,6 +61,11 @@
             </form>
         </section>
 
+        <section class="disponibilidad">
+            <h2>Disponibilidad de cupos</h2>
+            <div id="estadoDisponibilidad"></div>
+        </section>
+
         <section class="lista">
             <h2>Vehículos registrados</h2>
             <input type="text" id="buscar" placeholder="Buscar placa o nombre">
@@ -70,6 +77,11 @@
         <section class="reservas-admin">
             <h2>Reservas de todos los usuarios</h2>
             <div id="listaReservasAdmin"></div>
+        </section>
+
+        <section class="mensualidades-admin">
+            <h2>Vehículos con mensualidad</h2>
+            <div id="listaMensualidades"></div>
         </section>
     </main>
 

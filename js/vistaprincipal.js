@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     cargarVehiculos();
     cargarTarifas();
     cargarReservasAdmin();
+    cargarDisponibilidad();
+    cargarMensualidades();
 
     const formRegistro = document.getElementById("formRegistro");
     let isSubmitting = false; // Flag para evitar múltiples submits
@@ -43,6 +45,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                         formRegistro.reset(); // Limpiar formulario solo si fue exitoso
                     }
                     cargarVehiculos();
+                    cargarDisponibilidad();
                 })
                 .catch(err => {
                     console.error("Error:", err);
@@ -256,11 +259,91 @@ window.registrarSalida = async function(vehiculoId) {
             
             alert(mensaje);
             cargarVehiculos(); // Recargar lista de vehículos
+            cargarDisponibilidad();
         } else {
             alert(result.message || "Error al registrar la salida.");
         }
     } catch (error) {
         console.error("Error al registrar salida:", error);
         alert("Error al registrar la salida.");
+    }
+}
+
+// 🔹 Cargar disponibilidad de cupos
+async function cargarDisponibilidad() {
+    const cont = document.getElementById("estadoDisponibilidad");
+    if (!cont) return;
+    try {
+        cont.textContent = "Cargando disponibilidad...";
+        const res = await fetch("../php/obtenerDisponibilidad.php", { credentials: "include" });
+        const data = await res.json();
+        if (!data.success) {
+            cont.textContent = "Error al obtener disponibilidad";
+            return;
+        }
+        cont.textContent = `Cupos disponibles: ${data.disponibles} (${data.porcentaje}%)`;
+    } catch (e) {
+        cont.textContent = "Error al obtener disponibilidad";
+    }
+}
+
+// 🔹 Cargar mensualidades
+async function cargarMensualidades() {
+    const cont = document.getElementById("listaMensualidades");
+    if (!cont) return;
+    try {
+        cont.innerHTML = '<p style="color: #888; text-align: center;">Cargando mensualidades...</p>';
+        const res = await fetch("../php/listarMensualidades.php", { credentials: "include" });
+        const data = await res.json();
+        if (data.status === "error") {
+            cont.innerHTML = `<p style=\"color: #f44; text-align: center;\">${data.message}</p>`;
+            return;
+        }
+        if (!data.mensualidades || data.mensualidades.length === 0) {
+            cont.innerHTML = '<p style="color: #888; text-align: center;">No hay mensualidades registradas.</p>';
+            return;
+        }
+        let html = `
+            <table class=\"tabla-mensualidades\">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Usuario</th>
+                        <th>Placa</th>
+                        <th>Tipo</th>
+                        <th>Precio</th>
+                        <th>Método</th>
+                        <th>Código</th>
+                        <th>Inicio</th>
+                        <th>Fin</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+        data.mensualidades.forEach(m => {
+            const precioFmt = `$${Number(m.precio || 0).toLocaleString()}`;
+            html += `
+                <tr>
+                    <td>${m.id}</td>
+                    <td>${m.nombre_usuario || 'N/A'}</td>
+                    <td>${m.placa}</td>
+                    <td>${m.tipo_vehiculo}</td>
+                    <td>${precioFmt}</td>
+                    <td>${m.metodo_pago}</td>
+                    <td>${m.codigo_referencia}</td>
+                    <td>${m.fecha_inicio}</td>
+                    <td>${m.fecha_fin}</td>
+                    <td>${m.estado}</td>
+                </tr>
+            `;
+        });
+        html += `
+                </tbody>
+            </table>
+        `;
+        cont.innerHTML = html;
+    } catch (e) {
+        cont.innerHTML = '<p style="color: #f44; text-align: center;">Error al cargar mensualidades.</p>';
     }
 }

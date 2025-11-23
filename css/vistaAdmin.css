@@ -138,12 +138,69 @@ nav {
   padding: 10px 0;
 }
 
+nav a {
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #6b40c4 0%, #824ae6 100%);
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+nav a:hover, nav a.active {
+  background: linear-gradient(135deg, #824ae6 0%, #9a6dfc 100%);
+}
+
 /* ==== Sección de Reservas Admin ==== */
 section.reservas-admin {
   min-width: 100%;
   max-width: 100%;
   background-color: #f9f9f9;
   color: #222;
+}
+
+section.disponibilidad #estadoDisponibilidad {
+  background-color: #fff;
+  color: #222;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+section.mensualidades-admin {
+  min-width: 100%;
+  max-width: 100%;
+}
+
+.tabla-mensualidades {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background-color: white;
+  font-size: 0.9rem;
+}
+
+.tabla-mensualidades thead {
+  background-color: #45166b;
+  color: white;
+}
+
+.tabla-mensualidades th {
+  padding: 12px 8px;
+  text-align: left;
+  font-weight: bold;
+  border-bottom: 2px solid #6b40c4;
+}
+
+.tabla-mensualidades td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #ddd;
+  color: #222;
+}
+
+.tabla-mensualidades tbody tr:hover {
+  background-color: #f5f5f5;
 }
 
 /* ==== Tabla de Reservas Admin ==== */
