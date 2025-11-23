@@ -1,22 +1,27 @@
 <?php
 header('Content-Type: application/json');
 session_start();
+require_once __DIR__ . '/cors.php';
+require_once __DIR__ . '/db.php';
 
-// 🔹 Verificar sesión y rol de admin
 if (!isset($_SESSION['id']) || !isset($_SESSION['rol']) || $_SESSION['rol'] !== 'admin') {
   echo json_encode(["status" => "error", "message" => "Acceso denegado. Solo administradores."]);
   exit;
 }
 
-// 🔹 Conexión a la base de datos
-$conn = new mysqli("sql302.infinityfree.com", "if0_40478816", "ingSoftware2", "if0_40478816_parqueadero");
-if ($conn->connect_error) {
-  echo json_encode(["status" => "error", "message" => "Error al conectar con la base de datos."]);
+$sql1 = "SELECT id, usuario_id, nombre_usuario, placa, fecha_entrada, fecha_salida, fecha_registro FROM reservas ORDER BY fecha_registro DESC";
+$stmt = $conn->prepare($sql1);
+
+if (!$stmt) {
+  $sql2 = "SELECT id, usuario_id, nombre_usuario, placa, fecha_entrada, fecha_salida FROM reservas ORDER BY fecha_entrada DESC";
+  $stmt = $conn->prepare($sql2);
+}
+
+if (!$stmt) {
+  echo json_encode(["status" => "error", "message" => "Error preparando consulta de reservas."]);
   exit;
 }
 
-// 🔹 Obtener todas las reservas ordenadas por fecha de registro
-$stmt = $conn->prepare("SELECT id, usuario_id, nombre_usuario, placa, fecha_entrada, fecha_salida, fecha_registro FROM reservas ORDER BY fecha_registro DESC");
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -24,12 +29,12 @@ $reservas = [];
 while ($row = $result->fetch_assoc()) {
   $reservas[] = [
     'id' => $row['id'],
-    'usuario_id' => $row['usuario_id'],
-    'nombre_usuario' => $row['nombre_usuario'],
-    'placa' => $row['placa'],
-    'fecha_entrada' => $row['fecha_entrada'],
-    'fecha_salida' => $row['fecha_salida'],
-    'fecha_registro' => $row['fecha_registro']
+    'usuario_id' => $row['usuario_id'] ?? null,
+    'nombre_usuario' => $row['nombre_usuario'] ?? null,
+    'placa' => $row['placa'] ?? null,
+    'fecha_entrada' => $row['fecha_entrada'] ?? null,
+    'fecha_salida' => $row['fecha_salida'] ?? null,
+    'fecha_registro' => $row['fecha_registro'] ?? $row['fecha_entrada'] ?? null
   ];
 }
 

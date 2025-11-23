@@ -3,6 +3,7 @@
 session_start();
 ini_set('display_errors', 1); // Solo para desarrollo
 error_reporting(E_ALL);
+require_once __DIR__ . '/cors.php';
 
 require_once __DIR__ . '/db.php'; // Este archivo debe definir $conn como mysqli
 

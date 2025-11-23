@@ -1,5 +1,13 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
     console.log("Cargando vista principal...");
+    try {
+        const s = await fetch("../php/obtenerSesion.php", { credentials: "include" });
+        const d = await s.json();
+        if (!d.logged || d.rol !== "admin") {
+            window.location.href = "login.html";
+            return;
+        }
+    } catch (e) {}
     cargarVehiculos();
     cargarTarifas();
     cargarReservasAdmin();

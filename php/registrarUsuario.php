@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once __DIR__ . '/cors.php';
 
 // 🔹 Datos de conexión
 $host = "sql302.infinityfree.com";

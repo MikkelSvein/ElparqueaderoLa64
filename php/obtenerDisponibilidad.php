@@ -1,5 +1,6 @@
 <?php
 header('Content-Type: application/json');
+require_once __DIR__ . '/cors.php';
 
 $host = "sql302.infinityfree.com";
 $user = "if0_40478816";
