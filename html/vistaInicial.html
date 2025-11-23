@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Parqueadero La 64</title>
   <link rel="stylesheet" href="../css/vistaUsuario.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+HM3Eo0X5v26Y6S2ZWF2R9G3GJ3GxSk=" crossorigin="" />
 </head>
 <body>
   <!-- Encabezado -->
@@ -28,7 +29,10 @@
     <section class="left">
       <div class="card">
         <h3>UBICACIÓN</h3>
-        <img src="https://maps.app.goo.gl/nXGeWfvNvpfGMBHX9" alt="Mapa" class="mapa">
+        <div id="map" class="mapa" data-lat="6.265" data-lng="-75.566"></div>
+        <div style="margin-top:8px">
+          <a href="https://maps.app.goo.gl/EFgTyhHsEBzoELQt5" target="_blank" rel="noopener" style="color:#9a6dfc;text-decoration:none;font-weight:bold">Ver en Google Maps ↗</a>
+        </div>
       </div>
       <div class="card">
         <h3>CONTACTOS</h3>
@@ -53,6 +57,7 @@
       </div>
     </section>
   </main>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="../js/vistaUsuario.js"></script>
 </body>
 </html>

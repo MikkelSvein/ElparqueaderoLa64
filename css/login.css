@@ -8,8 +8,26 @@ body {
 
 header {
   background: linear-gradient(90deg, #000, #5a00ff, #ff007a);
-  padding: 20px;
+  padding: 20px 60px;
   text-align: center;
+  position: relative;
+}
+
+.back-btn {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  text-decoration: none;
+  background: rgba(255,255,255,0.1);
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.2);
 }
 
 .login-container {

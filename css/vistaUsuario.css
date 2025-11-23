@@ -14,10 +14,11 @@ body {
 /* ==== Encabezado ==== */
 header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   background: linear-gradient(90deg, #1a1a1a, #45166b, #122);
   padding: 15px 30px;
+  position: relative;
 }
 
 header .logo h1 {
@@ -30,6 +31,9 @@ header .logo h1 {
   display: flex;
   align-items: center;
   gap: 10px;
+  position: absolute;
+  right: 20px;
+  top: 15px;
 }
 
 .user-section .bienvenido {
@@ -99,7 +103,15 @@ main {
 /* ==== Ubicación ==== */
 .mapa {
   width: 100%;
+  height: 240px;
   border-radius: 5px;
+}
+
+.mapa.leaflet-container {
+  height: 240px;
+  width: 100%;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 /* ==== WhatsApp ==== */
@@ -230,4 +242,15 @@ button.buttonLogout {
     padding: 4px 8px;
     font-size: 0.75rem;
   }
+}
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.logo img {
+  max-width: 320px;
+  height: auto;
 }
